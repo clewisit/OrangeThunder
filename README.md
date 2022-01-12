@@ -169,7 +169,7 @@ sudo apt-get install ntp
 ### Audio Piping Setup
 
 
-Install ALSA
+Install ALSA (Source)
 
 ```
 cd /usr/src
@@ -208,6 +208,12 @@ cd alsa-utils-xxx
 ./configure ; make ; make install
 ```
 
+Install ALSA-OSS (Raspbian Buster)
+ALSA is already pre-installed on Rasberry Pi OS (Raspbian).  This includes the snd-aloop kernel driver.  Install the alsa-oss package to provide the snd-pcm-oss kernel driver.  
+```
+sudo apt install alsa-oss
+```
+I'm not sure which packages provide the snd-mixer-oss or snd-seq-oss packages.  It's possible these may be replaced by pulse audio mixer commands.
 
 Install modules into kernel
 
@@ -263,6 +269,14 @@ git clone https://github.com/lu7did/PixiePi
 cd PixiePi/src
 sudo make
 sudo make install
+```
+
+### ft8_lib
+
+ft8_lib is required as a dependency.  It seems to have been updated since this project started, so we will use an older branch.  It does not need to be compiled, but the files must be present for OrangeThunder to compile.
+```
+cd /home/pi
+git clone -b oop-decoder https://github.com/kgoba/ft8_lib 
 ```
 
 # Program usage
