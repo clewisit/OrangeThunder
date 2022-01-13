@@ -64,7 +64,8 @@ ft817_modes={ 0x00 : 'LSB',
 #cmdRXUSB="rtl_sdr -s 1200000 -f %LO% -D 2 - | csdr convert_u8_f | csdr shift_addition_cc `python -c "print float(%LO%-%FREQ%)/%SAMPLE%"`| csdr fir_decimate_cc 25 0.05 HAMMING | csdr bandpass_fir_fft_cc 0 0.5 0.05 | csdr realpart_cf | csdr agc_ff | csdr limit_ff | csdr convert_f_s16 | aplay -t raw -f S16_LE -c1 -r48000"
 cmdRXUSB="rtl_sdr -s 1200000 -f %LO% -D 2 - | csdr convert_u8_f "
 
-cmdTXUSB="arecord -c1 -r48000 -D default -fS16_LE - | csdr convert_i16_f | csdr fir_interpolate_cc 2 | csdr dsb_fc | csdr bandpass_fir_fft_cc 0.002 0.06 0.01 | csdr fastagc_ff | sudo ./sendiq -i /dev/stdin -s 96000 -f %FREQ% -t float"
+cmdTXUSB="arecord -c1 -r48000 -D 
+ault -fS16_LE - | csdr convert_i16_f | csdr fir_interpolate_cc 2 | csdr dsb_fc | csdr bandpass_fir_fft_cc 0.002 0.06 0.01 | csdr fastagc_ff | sudo ./sendiq -i /dev/stdin -s 96000 -f %FREQ% -t float"
 pRX=None
 pTX=None
 z=None
@@ -207,7 +208,7 @@ vfoAB=0
 SPLIT=False
 PTT=False
 CAT=4800
-MODE=01
+MODE=0x01
 LOCK=False
 CLAR=False
 LO=14100000
@@ -405,7 +406,7 @@ def ot_lock():
 #* ot_readTXmeter
 #* Implement the read TX meter                              ---PENDING---
 #*-----------------------------------------------------------------------
-def ot_readTXmeter()
+def ot_readTXmeter():
     log(2,'OT[ot_readTXmeter] Read TX meter change (%s)' % ("Not Implemented"))
     putStatus()
     return 0
@@ -414,7 +415,7 @@ def ot_readTXmeter()
 #* ot_setClar
 #* Implement the clarifier frequency                         ---PENDING---
 #*-----------------------------------------------------------------------
-def ot_setClar()
+def ot_setClar():
     log(2,'OT[ot_setClar] Set clarifier frequency (%s)' % ("Not Implemented"))
     putStatus()
     return 0
@@ -763,7 +764,7 @@ def killReceiver():
 #* MAIN PROGRAM
 #*----------------------------------------------------------------------------
 try:
- log(0,"Booting transceiver PID(%d)" % (os.getPid())
+ log(0,"Booting transceiver PID(%d)" % (os.getPid()))
 
 #*----------------------------------------------------------------------------
 #* Process arguments
