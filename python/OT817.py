@@ -62,9 +62,23 @@ ft817_modes={ 0x00 : 'LSB',
 #* Prototype commands
 #*----------------------------------------------------------------------------
 #cmdRXUSB="rtl_sdr -s 1200000 -f %LO% -D 2 - | csdr convert_u8_f | csdr shift_addition_cc `python -c "print float(%LO%-%FREQ%)/%SAMPLE%"`| csdr fir_decimate_cc 25 0.05 HAMMING | csdr bandpass_fir_fft_cc 0 0.5 0.05 | csdr realpart_cf | csdr agc_ff | csdr limit_ff | csdr convert_f_s16 | aplay -t raw -f S16_LE -c1 -r48000"
+cmdRXLSB="rtl_sdr -s 1200000 -f %LO% -D 2 - | csdr convert_u8_f "
 cmdRXUSB="rtl_sdr -s 1200000 -f %LO% -D 2 - | csdr convert_u8_f "
+cmdRXCW="rtl_sdr -s 1200000 -f %LO% -D 2 - | csdr convert_u8_f "
+cmdRXCWR="rtl_sdr -s 1200000 -f %LO% -D 2 - | csdr convert_u8_f "
+cmdRXAM="rtl_sdr -s 1200000 -f %LO% -D 2 - | csdr convert_u8_f "
+cmdRXFM="rtl_sdr -s 1200000 -f %LO% -D 2 - | csdr convert_u8_f "
+cmdRXDIG="rtl_sdr -s 1200000 -f %LO% -D 2 - | csdr convert_u8_f "
+cmdRXPKT="rtl_sdr -s 1200000 -f %LO% -D 2 - | csdr convert_u8_f "
 
+cmdTXLSB="arecord -c1 -r48000 -D 
 cmdTXUSB="arecord -c1 -r48000 -D 
+cmdTXCW="arecord -c1 -r48000 -D 
+cmdTXCWR="arecord -c1 -r48000 -D 
+cmdTXAM="arecord -c1 -r48000 -D 
+cmdTXFM="arecord -c1 -r48000 -D 
+cmdTXDIG="arecord -c1 -r48000 -D 
+cmdTXPKT="arecord -c1 -r48000 -D 
 ault -fS16_LE - | csdr convert_i16_f | csdr fir_interpolate_cc 2 | csdr dsb_fc | csdr bandpass_fir_fft_cc 0.002 0.06 0.01 | csdr fastagc_ff | sudo ./sendiq -i /dev/stdin -s 96000 -f %FREQ% -t float"
 pRX=None
 pTX=None
@@ -191,14 +205,14 @@ signal.signal(signal.SIGTERM, signal_handler)
 #* SDR Configuration Topology Dictionary
 #* Pointers to implemented SDR processors (only USB so far)
 #*----------------------------------------------------------------------------
-sdr_modes={ 0x00 : ["",""] ,
+sdr_modes={ 0x00 : [cmdRXLSB,cmdTXLSB] ,
             0x01 : [cmdRXUSB,cmdTXUSB],
-            0x02 : ["",""],
-            0x03 : ["",""],
-            0x04 : ["",""],
-            0x08 : ["",""],
-            0x0A : ["",""],
-            0x0C : ["",""]}
+            0x02 : [cmdRXCW,cmdTXCW],
+            0x03 : [cmdRXCWR,cmdTXCWR],
+            0x04 : [cmdRXAM,cmdTXAM],
+            0x08 : [cmdRXFM,cmdTXFM],
+            0x0A : [cmdRXDIG,cmdTXDIG],
+            0x0C : [cmdRXPKT,cmdTXPKT]}
 #*----------------------------------------------------------------------------
 #* Transceiver state variables
 #*----------------------------------------------------------------------------
