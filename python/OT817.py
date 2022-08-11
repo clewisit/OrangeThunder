@@ -71,15 +71,14 @@ cmdRXFM="rtl_sdr -s 1200000 -f %LO% -D 2 - | csdr convert_u8_f "
 cmdRXDIG="rtl_sdr -s 1200000 -f %LO% -D 2 - | csdr convert_u8_f "
 cmdRXPKT="rtl_sdr -s 1200000 -f %LO% -D 2 - | csdr convert_u8_f "
 
-cmdTXLSB="arecord -c1 -r48000 -D 
-cmdTXUSB="arecord -c1 -r48000 -D 
-cmdTXCW="arecord -c1 -r48000 -D 
-cmdTXCWR="arecord -c1 -r48000 -D 
-cmdTXAM="arecord -c1 -r48000 -D 
-cmdTXFM="arecord -c1 -r48000 -D 
-cmdTXDIG="arecord -c1 -r48000 -D 
-cmdTXPKT="arecord -c1 -r48000 -D 
-ault -fS16_LE - | csdr convert_i16_f | csdr fir_interpolate_cc 2 | csdr dsb_fc | csdr bandpass_fir_fft_cc 0.002 0.06 0.01 | csdr fastagc_ff | sudo ./sendiq -i /dev/stdin -s 96000 -f %FREQ% -t float"
+cmdTXLSB="arecord -c1 -r48000 -D ault -fS16_LE - | csdr convert_i16_f | csdr fir_interpolate_cc 2 | csdr dsb_fc | csdr bandpass_fir_fft_cc 0.002 0.06 0.01 | csdr fastagc_ff | sudo ./sendiq -i /dev/stdin -s 96000 -f %FREQ% -t float"
+cmdTXUSB="arecord -c1 -r48000 -D ault -fS16_LE - | csdr convert_i16_f | csdr fir_interpolate_cc 2 | csdr dsb_fc | csdr bandpass_fir_fft_cc 0.002 0.06 0.01 | csdr fastagc_ff | sudo ./sendiq -i /dev/stdin -s 96000 -f %FREQ% -t float"
+cmdTXCW="arecord -c1 -r48000 -D ault -fS16_LE - | csdr convert_i16_f | csdr fir_interpolate_cc 2 | csdr dsb_fc | csdr bandpass_fir_fft_cc 0.002 0.06 0.01 | csdr fastagc_ff | sudo ./sendiq -i /dev/stdin -s 96000 -f %FREQ% -t float"
+cmdTXCWR="arecord -c1 -r48000 -D ault -fS16_LE - | csdr convert_i16_f | csdr fir_interpolate_cc 2 | csdr dsb_fc | csdr bandpass_fir_fft_cc 0.002 0.06 0.01 | csdr fastagc_ff | sudo ./sendiq -i /dev/stdin -s 96000 -f %FREQ% -t float"
+cmdTXAM="arecord -c1 -r48000 -D ault -fS16_LE - | csdr convert_i16_f | csdr fir_interpolate_cc 2 | csdr dsb_fc | csdr bandpass_fir_fft_cc 0.002 0.06 0.01 | csdr fastagc_ff | sudo ./sendiq -i /dev/stdin -s 96000 -f %FREQ% -t float"
+cmdTXFM="arecord -c1 -r48000 -D ault -fS16_LE - | csdr convert_i16_f | csdr fir_interpolate_cc 2 | csdr dsb_fc | csdr bandpass_fir_fft_cc 0.002 0.06 0.01 | csdr fastagc_ff | sudo ./sendiq -i /dev/stdin -s 96000 -f %FREQ% -t float"
+cmdTXDIG="arecord -c1 -r48000 -D ault -fS16_LE - | csdr convert_i16_f | csdr fir_interpolate_cc 2 | csdr dsb_fc | csdr bandpass_fir_fft_cc 0.002 0.06 0.01 | csdr fastagc_ff | sudo ./sendiq -i /dev/stdin -s 96000 -f %FREQ% -t float"
+cmdTXPKT="arecord -c1 -r48000 -D ault -fS16_LE - | csdr convert_i16_f | csdr fir_interpolate_cc 2 | csdr dsb_fc | csdr bandpass_fir_fft_cc 0.002 0.06 0.01 | csdr fastagc_ff | sudo ./sendiq -i /dev/stdin -s 96000 -f %FREQ% -t float"
 pRX=None
 pTX=None
 z=None
